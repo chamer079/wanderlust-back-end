@@ -1,13 +1,13 @@
 const mongoose = require("mongoose")
 
 
-const todoListSchema = new mongoose.Schema({
+const todoListSchema = mongoose.Schema({
     sight: { type: String },
     activity: { type: String },
     food: { type: String },
 })
 
-const budgetSchema = new mongoose.Schema({
+const budgetSchema = mongoose.Schema({
     travel: { type: Number },
     lodging: { type: Number },
     food: { type: Number },
@@ -17,14 +17,14 @@ const budgetSchema = new mongoose.Schema({
     emergancy: { type: Number },
 })
 
-const itinerarySchema = new mongoose.Schema({
+const itinerarySchema = mongoose.Schema({
     date: { type: String },
     duration: { type: String },
     budgets: [ budgetSchema ],
     todoLists: [ todoListSchema ],
 })
 
-const tripSchema = new mongoose.Schema({
+const tripSchema = mongoose.Schema({
     destination: { type: String, required: true },
     image: { type: String, required: true },
     itineraries: [ itinerarySchema ],

@@ -1,10 +1,17 @@
+const Trip = require("../models/Trip.js")
 const express = require("express")
 const router = express.Router() //<- purpose? Connecting express to react?
 
-const Trip = require("../models/Trip.js")
 
 // Create
-
+router.post("/", async (req, rez, next) => {
+    try {
+        const newTrip = await Trip.create(req.body)
+        res.status(201).json(newtrip)
+    }catch (err) {
+        res.status(500).json(err)
+    }
+})
 
 // Index/Show All
 // router.get("/", async (req, res, next) => {
@@ -19,3 +26,6 @@ const Trip = require("../models/Trip.js")
 
 
 // Update
+
+
+module.exports = router
