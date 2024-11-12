@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-// Delete
+// Delete - DESTROY - /trips/:tripId
 router.delete("/:tripId", async (req, res) => {
     try {
         // throw new Error("This is a delete test error.")
@@ -41,7 +41,24 @@ router.delete("/:tripId", async (req, res) => {
     }
 })
 
-// Update
+// Update - PUT - /trips/:tripId
+router.put("/:tripId", async (req, res) => {
+    // res.json({ message: `Update route with the param ${req.params.tripId}`})
+    try {
+        const updatedTrip = await Trip.findByIdAndUpdate(req.params.tripId, req.body)
+        if(!updatedTrip){
+            res.status(404)
+            throw new Error("Trip not found.")
+        }
+        res.status(200).json(updatedTrip)
+    } catch (error){
+        if(res.statusCode === 404){
+            res.json({ error: error.message })
+        } else{
+            res.status(500).json({ error: error.message })
+        }
+    }
+})
 
 
 module.exports = router
