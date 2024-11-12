@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Itinerary = require("./Itirary")
 
 
 const todoListSchema = mongoose.Schema({
@@ -27,7 +28,7 @@ const itinerarySchema = mongoose.Schema({
 const tripSchema = mongoose.Schema({
     destination: { type: String, required: true },
     image: { type: String, required: true },
-    itineraries: [ itinerarySchema ],
+    itineraries: [ Itinerary ],
 })
 
 const Trip = mongoose.model("Trip", tripSchema)

@@ -3,24 +3,19 @@ const express = require("express")
 const router = express.Router() //<- purpose? Connecting express to react?
 
 
-// Create
-router.post("/", async (req, rez, next) => {
+// Create - POST -
+router.post("/", async (req, res) => {
+    res.json({message: "create route"})
     try {
-        const newTrip = await Trip.create(req.body)
-        res.status(201).json(newtrip)
+        const createdTrip = await Trip.create(req.body)
+        res.status(201).json(createdTrip)
     }catch (err) {
-        res.status(500).json(err)
+        res.status(500)({ err: error.message })
     }
 })
 
 // Index/Show All
-// router.get("/", async (req, res, next) => {
-//     try {
 
-//     } catch(err){
-
-//     }
-// })
 
 // Delete
 
