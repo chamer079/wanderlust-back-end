@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router() //<- purpose? Connecting express to react?
 
-const Trip = require("../models/Trip.cjs")
+const Trip = require("../models/Trip.js")
 
 // Create
 

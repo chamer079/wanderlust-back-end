@@ -5,7 +5,6 @@ const app = express()
 const mongoose = require("mongoose")
 const cors = require("cors")
 
-const tripsRouter = require("./controllers/trips.cjs")
 
 mongoose.connect(process.env.MONGODB_URI)
 
@@ -18,7 +17,7 @@ mongoose.connection.on("error", (err) => {
 })
 
 // mount the router
-app.use("/trips", tripsRouter)
+app.use(express.json())
 
 
 // Routes Go Here
