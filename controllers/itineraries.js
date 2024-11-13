@@ -50,9 +50,6 @@ router.delete("/trips/:id/itineraries/:itineraryId", async (req, res) => {
 })
 
 
-// Update -> PUT -> /trips/:tripId/itineraries/itineraryId
-
-
 
 module.exports = router
 

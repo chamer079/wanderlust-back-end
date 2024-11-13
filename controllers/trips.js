@@ -27,6 +27,28 @@ router.get("/", async (req, res) => {
     }
 })
 
+// Show 1/ Read 1 - GET - /trips/:id
+router.get("/:id", async (req, res) => {
+    // res.json({ message: `Show route w/ the param ${req.params.id}` })
+
+    try {
+        const foundTrip = await Trip.findById(req.params.id)
+        if (!foundTrip){
+            res.status(404)
+            throw new Error("Trip not found.")
+        }
+        res.status(200).json(foundTrip)
+    }catch (error){
+        if (res.statusCode === 404){
+            res.json({ error: error.message })
+        }else {
+            res.status(500).json({ error: error.message })
+        }
+    }
+
+})
+
+
 // Delete - DESTROY - /trips/:id
 router.delete("/:id", async (req, res) => {
     try {
