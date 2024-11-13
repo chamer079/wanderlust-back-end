@@ -1,5 +1,6 @@
 const Trip = require("../models/Trip")
 const express = require("express")
+const { route } = require("./trips")
 const router = express.Router()
 
 
@@ -32,6 +33,20 @@ router.get("/trips/:id/itineraries", async (req, res) => {
     }catch (error) {
             res.status(500).json({ error: error.message })
         }
+})
+
+// Delete -> DESTROY -> /trips/:id/itineraries/:itineraryId
+router.delete("/trips/:id/itineraries/:itineraryId", async (req, res) => {
+    try {
+// throw new Error("This is an itinerary delete test error")
+        const deleteItinerary = await Trip.findByIdAndDelete(req.params.itineraryId)
+    }catch (error) {
+        const deleteResponse = { error: error.message }
+        if(res.status === 404){
+            return res.json(deleteResponse)
+        }
+        res.status(500).json(deleteResponse)
+    }
 })
 
 
