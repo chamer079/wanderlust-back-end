@@ -23,8 +23,15 @@ router.post("/trips/:id/itineraries", async (req, res) => {
 })
 
 // Read/Show 1 -> GET -> /trips/:tripId/itineraries/:inineraryId
-router.get("/trips/:id/itineraries/:id", async (req, res) => {
-    res.json({ message: "index route" })
+router.get("/trips/:id/itineraries", async (req, res) => {
+    // res.json({ message: "index route" })
+
+    try {
+        const getAllItineraries = await Trip.find()
+        res.status(200).json(getAllItineraries)
+    }catch (error) {
+            res.status(500).json({ error: error.message })
+        }
 })
 
 
