@@ -24,7 +24,7 @@ app.use(express.json())
 
 // Routes Go Here
 app.use("/trips", tripRouter)
-app.use("/trips/:tripId/itineraries", itineraryRouter)  
+app.use("/", itineraryRouter)  
 
 app.listen(process.env.PORT || 3000, () => {
     console.log("The express app is ready!")
