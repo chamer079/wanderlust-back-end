@@ -1,17 +1,19 @@
 const Trip = require("../models/Trip")
 const express = require("express")
 const { route } = require("./trips")
-const router = express.Router()
+const router = express.Router({ mergeParams: true })
 
 
 // Create -> POST -> /trips/:id/itineraries
-router.post("/trips/:id/itineraries", async (req, res) => {
+router.post("/", async (req, res) => {
     // res.json({  message: "itinerary create route" })
     // console.log(req.params)
     // console.log(req.body)
-
+    
     
     try {
+        const tripId = req.params.id
+
         const createdItinerary = await Trip.findById(req.params.id)
         createdItinerary.itineraries.push(req.body)
 
@@ -23,23 +25,17 @@ router.post("/trips/:id/itineraries", async (req, res) => {
     }
 })
 
-// Read/Show 1 -> GET -> /trips/:tripId/itineraries/:inineraryId
-router.get("/trips/:id/itineraries", async (req, res) => {
-    // res.json({ message: "index route" })
-
-    try {
-        const getAllItineraries = await Trip.find()
-        res.status(200).json(getAllItineraries)
-    }catch (error) {
-            res.status(500).json({ error: error.message })
-        }
-})
 
 // Delete -> DESTROY -> /trips/:id/itineraries/:itineraryId
-router.delete("/trips/:id/itineraries/:itineraryId", async (req, res) => {
+router.delete("/:itineraryId", async (req, res) => {
     try {
-// throw new Error("This is an itinerary delete test error")
-        const deleteItinerary = await Trip.findByIdAndDelete(req.params.itineraryId)
+        const tripId = req.params.id
+        const itineraryId = req.params.itineraryId
+        // throw new Error(`Deleting the child ${itineraryId} from the parent ${tripId}`)
+        
+        const trip = await Trip.findById(tripId)
+        trip.itineraries.remove({ _id: itineraryId})
+        await trip.save()
     }catch (error) {
         const deleteResponse = { error: error.message }
         if(res.status === 404){
