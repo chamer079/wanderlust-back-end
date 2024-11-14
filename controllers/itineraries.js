@@ -34,7 +34,7 @@ router.delete("/:itineraryId", async (req, res) => {
         // throw new Error(`Deleting the child ${itineraryId} from the parent ${tripId}`)
         
         const trip = await Trip.findById(tripId)
-        trip.itineraries.remove({ _id: itineraryId})
+        trip.itineraries.remove({ _id: itineraryId })
         await trip.save()
     }catch (error) {
         const deleteResponse = { error: error.message }
