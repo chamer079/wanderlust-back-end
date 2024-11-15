@@ -5,7 +5,8 @@ const app = express()
 const mongoose = require("mongoose")
 const cors = require("cors")
 
-const tripsRouter = require("./controllers/trips.cjs")
+const tripRouter = require("./controllers/trips.js")
+const itineraryRouter = require("./controllers/itineraries.js")
 
 mongoose.connect(process.env.MONGODB_URI)
 
@@ -18,11 +19,13 @@ mongoose.connection.on("error", (err) => {
 })
 
 // mount the router
-app.use("/trips", tripsRouter)
+app.use(express.json())
 
 
 // Routes Go Here
+app.use("/trips", tripRouter)
+app.use("/trips/:id/itineraries", itineraryRouter)  
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("The express app is ready!")
 })

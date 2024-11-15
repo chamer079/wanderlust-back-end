@@ -1,32 +1,21 @@
 const mongoose = require("mongoose")
 
 
-const todoListSchema = new mongoose.Schema({
+const itinerarySchema = mongoose.Schema({
     sight: { type: String },
     activity: { type: String },
     food: { type: String },
 })
 
-const budgetSchema = new mongoose.Schema({
-    travel: { type: Number },
-    lodging: { type: Number },
-    food: { type: Number },
-    souvenir: { type: Number },
-    shopping: { type: Number },
-    attraction: { type: Number },
-    emergancy: { type: Number },
-})
-
-const itinerarySchema = new mongoose.Schema({
+const tripSchema = mongoose.Schema({
+    destination: { type: String },
+    image: { type: String },
     date: { type: String },
     duration: { type: String },
-    budgets: [ budgetSchema ],
-    todoLists: [ todoListSchema ],
-})
-
-const tripSchema = new mongoose.Schema({
-    destination: { type: String, required: true },
-    image: { type: String, required: true },
+    accomodationBudget: { type: Number },
+    shoppingBudget: { type: Number },
+    entertainmentBudget: { type: Number },
+    emergencyBudget: { type: Number },
     itineraries: [ itinerarySchema ],
 })
 
