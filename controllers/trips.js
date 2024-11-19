@@ -47,7 +47,7 @@ router.delete("/:id", async (req, res) => {
       return res.json(deleteResponse);
     }
     res.status(500).json(deleteResponse);
-  }
+  } 
 });
 
 router.put("/:id", async (req, res) => {
