@@ -37,25 +37,25 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Delete - DESTROY - /trips/:id
 router.delete("/:id", async (req, res) => {
   try {
-    // throw new Error("This is a delete test error.")
     const deletedTrip = await Trip.findByIdAndDelete(req.params.id);
+    res.status(200).json(deletedTrip);
   } catch (error) {
     const deleteResponse = { error: error.message };
     if (res.status === 404) {
       return res.json(deleteResponse);
     }
     res.status(500).json(deleteResponse);
-  }
+  } 
 });
 
 router.put("/:id", async (req, res) => {
   try {
     const updatedTrip = await Trip.findByIdAndUpdate(
       req.params.tripId,
-      req.body
+      req.body,
+      { new: true }
     );
     if (!updatedTrip) {
       res.status(404);
