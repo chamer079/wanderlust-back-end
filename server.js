@@ -8,7 +8,7 @@ const cors = require("cors");
 const tripRouter = require("./controllers/trips.js");
 const itineraryRouter = require("./controllers/itineraries.js");
 
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: ["http://localhost:5173", "https://lustrous-syrniki-1f5680.netlify.app"] }));
 
 mongoose.connect(process.env.MONGODB_URI);
 
