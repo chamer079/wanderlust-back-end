@@ -52,6 +52,7 @@ router.delete("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    console.log(req.body)
     const updatedTrip = await Trip.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -61,6 +62,7 @@ router.put("/:id", async (req, res) => {
       res.status(404);
       throw new Error("Trip not found.");
     }
+    console.log(updatedTrip)
     res.status(200).json(updatedTrip);
   } catch (error) {
     if (res.statusCode === 404) {
