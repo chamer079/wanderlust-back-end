@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 
 const itinerarySchema = mongoose.Schema({
-  sight: { type: String },
-  activity: { type: String },
-  food: { type: String },
+  text: { type: String },
+  category: { 
+    type: String,
+    enum: ["sights", "activities", "food"], 
+  },
 });
 
 const tripSchema = mongoose.Schema({
